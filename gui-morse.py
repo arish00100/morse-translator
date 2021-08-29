@@ -1,15 +1,21 @@
 import tkinter as tk
 from tkinter import font
-from tkinter.constants import HORIZONTAL
 import morsecode,time
 
 
+####################
+#Initial setup
+
 win=tk.Tk()
-win.geometry('1920x1080')
+win.geometry('800x800')
 win.title("Morse Code Translator")
 win.configure(bg='gray15')
 
-#Variables
+#Icon
+photo=tk.PhotoImage(file="icon.png")
+win.iconphoto(False,photo)
+
+#tkinter Variables
 user_text=tk.StringVar()
 translated_morse=tk.StringVar()
 timeunit_var=tk.DoubleVar()
@@ -23,6 +29,12 @@ defaultFont.configure(family="Segoe UI Semibold",size=15)
 textFont=font.nametofont("TkTextFont")
 textFont.configure(family="Segoe UI Semibold",size=15)
 
+
+
+
+#######################
+#Button functions
+
 #Function for encrypt_button
 def encrypt():
     generated_morse=morsecode.encrypt(user_entry.get().upper())
@@ -30,30 +42,32 @@ def encrypt():
     morse_entry.insert(0,generated_morse)
     
 
-    
-    
-
 #Function for beep_button
 def playsound():
-    morsecode.playsound(translated_morse.get())
+    morsecode.playsound(translated_morse.get(),timeunit_var.get(),frequency_var.get())
+
 
 ######################
 #Header
 
-header=tk.Label(text="Morse Code translator",font=('Source Code Pro Semibold',30),
+header_frame=tk.Frame(bg='gray15')
+
+#Heading
+header=tk.Label(header_frame,text="Morse Code translator",font=('Source Code Pro Semibold',30),
                 bg='gray15',fg='steelblue1'
                 )
-header.pack(pady=10)
-#
+header.pack()
 
-design=tk.Label(text='-- --- .-. ... . / -.-. --- -.. .',bg='gray15',fg='red',font=('Segoe UI Semibold',20))
+#Morse design
+design=tk.Label(header_frame,text='-- --- .-. ... . / -.-. --- -.. .',bg='gray15',fg='red',
+                font=('Source Code Pro Semibold',20),)
 design.pack()
 
+header_frame.pack(pady=20)
 
 
-
-
-######################
+#####################
+#User entry
 
 #Text entry frame
 user_entry_frame=tk.Frame()
@@ -72,13 +86,13 @@ user_entry.pack(fill=tk.Y)
 user_entry_frame.pack(pady=30)
 
 #########################
-
 #Button to encrypt
+
 encrypt_button=tk.Button(text='Translate to morse',command=encrypt,bg='firebrick4',fg='white')
 encrypt_button.pack()
 
 #########################
-
+#Translated morse
 
 #Morse code frame
 morse_code_frame=tk.Frame(bg='gray15')
@@ -102,28 +116,29 @@ beep_button.pack(pady=10,anchor='e')
 
 morse_code_frame.pack(pady=30)
 
+
 ######################
+#Scales
 
-#Scale 
+sliders_frame=tk.Frame(bg='gray15')
 
-sliders_frame=tk.Frame()
-
-#Time unit frame
-timeunit_scale=tk.Scale(master=sliders_frame,orient=HORIZONTAL,from_=0.1,to=4,resolution=0.1,
-                variable=timeunit_var,bg='gray15',fg='white',length=500
+#Time unit scale
+timeunit_scale=tk.Scale(sliders_frame,orient=tk.HORIZONTAL,from_=0.1,to=1,resolution=0.1,
+                variable=timeunit_var,bg='gray15',fg='steelblue1',length=500,label="Set time unit (seconds)",
+                relief=tk.FLAT,bd=0,highlightthickness=0
                 )
-timeunit_scale.pack()
+timeunit_scale.set(0.2)
+timeunit_scale.pack(pady=10)
 
-#Frequency frame
-frequency_scale=tk.Scale(master=sliders_frame,orient=HORIZONTAL,from_=500,to=3000,resolution=100,
-                variable=frequency_var,bg='gray15'
+#Frequency scale
+frequency_scale=tk.Scale(sliders_frame,orient=tk.HORIZONTAL,from_=100,to=3000,resolution=100,
+                variable=frequency_var,bg='gray15',fg='steelblue1',length=500,label="Set frequency (Hz)",
+                highlightthickness=0
                 )
-frequency_scale.pack()
+frequency_scale.set(1000)
+frequency_scale.pack(pady=10)
 
 sliders_frame.pack()
-
-
-
 
 
 
@@ -133,55 +148,39 @@ win.mainloop()
 
 ##To-do
 
-#Beep debugging
-#call dot and dash functions
+#Folder
 
-
-#Speed of beep
-#frequency of beep
-#Stop sound
-#Frequency
-
-
+#multi-threading
 #Efficiency of program
 #Hanging when long message
+#Stop sound playing
 
-#Text to speech
-#pyttsx3
-
-
-
-
-
-#Layout
-
-#Icon
-
+#Widgets javatpoint
 #Borders
 #relief
 #bd
-#All widgets functions
-
-#image for speaker
-
-#TextBox
+#All widgets functions attributes
+#Layout function attributes
 
 #Colors and font
 #Color theme
 #Entry color
 #UI primary and secondary colors
 
+#Text to speech
+#pyttsx3
 
+#Layout
+#TextBox
+
+#image for speaker
 
 #About menu
 
 #readme.md, pip
 #Only for windows
 
-
-
 #error handling
 
-#winsound sleep
 
 

@@ -127,3 +127,9 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+#User files
+Morse-Code-Chart.png
+beepy1.py
+fonts.py
+thread.py

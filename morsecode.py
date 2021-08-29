@@ -3,6 +3,7 @@
 
 # Dictionary representing the morse code chart
 import winsound,time
+from threading import Timer
 
 
 MORSE_CODE_DICT = { 'A':'.-', 'B':'-...',
@@ -37,32 +38,59 @@ def encrypt(message):
 			# 1 space indicates different characters
 			# and 2 indicates different words
 			cipher += '/ '
-		
-
 	return cipher
 
+def emptyfun():
+	pass
 
-def playsound(morse):
-	timeunit=0.1	#0.5second
-	frequency=1000
+def playdot(timeunit,frequency):
+	winsound.Beep(int(frequency),int(timeunit*1000))
+	# t=Timer(timeunit,emptyfun)
+	# t.start()
+	time.sleep(timeunit)
+
+
+def playdash(timeunit,frequency):
+	winsound.Beep(int(frequency),int(timeunit*3*1000))
+	# t=Timer(timeunit,emptyfun)
+	# t.start()
+	time.sleep(timeunit)
+
+
+
+
+def playsound(morse,timeunit,frequency):
+	# timeunit=0.1	#0.5second
+	# frequency=1000
 	multiplier=0
 	for symbol in morse:
 		multiplier=0
 		if(symbol=='.'):
-			multiplier=1
+			# multiplier=1
+			# winsound.Beep(int(frequency),int(timeunit*1000))
+			playdot(timeunit,frequency)
 		elif(symbol=='-'):
-			multiplier=3
+			# multiplier=3
+			playdash(timeunit,frequency)
 		elif(symbol==' '):
 			time.sleep(timeunit*3)
+			# continue
+			# t=Timer(timeunit*3,emptyfun)
+			# t.start()
 			continue
 		elif(symbol=='/'):
 			time.sleep(timeunit)
 			continue
+			# t=Timer(timeunit,emptyfun)
+			# t.start()
+			# continue
 		else:
 			pass
 		
-		winsound.Beep(frequency,int(timeunit*multiplier*1000))
-		time.sleep(timeunit)
+		# winsound.Beep(int(frequency),int(timeunit*multiplier*1000))
+		# time.sleep(timeunit)
+		# t=Timer(timeunit,emptyfun)
+
 
 
 # Function to decrypt the string
