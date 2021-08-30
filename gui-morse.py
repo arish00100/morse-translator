@@ -68,6 +68,9 @@ def dash_insert():
 def space_insert():
     morse_entry.insert(tk.END,' ')
 
+def clear0():
+    user_entry.delete(0,tk.END)
+
 def clear():
     morse_entry.delete(0,tk.END)
 
@@ -103,11 +106,21 @@ header_frame.pack(pady=20)
 #Text entry frame
 user_entry_frame=tk.Frame(bg='gray15')
 
+top_frame=tk.Frame(user_entry_frame,bg='gray15')
+
 #Text entry label
-user_entry_label=tk.Label(user_entry_frame,text="Text",bg='gray15',
-                fg='#f20d0d',width=50,anchor='w'
+user_entry_label=tk.Label(top_frame,text="Text",bg='gray15',
+                fg='#f20d0d',width=44,anchor='w'
                 )
-user_entry_label.pack(pady=(0,5))
+user_entry_label.grid(row=0,column=0)
+
+clear_button0=tk.Button(top_frame,text='Clear',command=clear0,bg='#a11212',fg='white',
+            activebackground='#a11212',activeforeground='white', relief=tk.FLAT, bd=3
+            )
+clear_button0.grid(row=0,column=1,sticky=E)
+
+top_frame.pack()
+
 
 #Text entry
 user_entry=tk.Entry(user_entry_frame,textvariable=user_text,
@@ -153,9 +166,9 @@ row1_frame=tk.Frame(morse_code_frame,bg='gray15')
 
 #Morse code label
 morse_code_label=tk.Label(row1_frame,text="Morse code",bg='gray15',fg='#f20d0d',
-                width=35,anchor=W
+                width=32,anchor=W
                 )
-morse_code_label.grid(row=0,column=0,sticky=W,pady=0)
+morse_code_label.grid(row=0,column=0,pady=0)
 
 #Dot button
 dot_button=tk.Button(row1_frame,text='.',command=dot_insert,bg='#a11212',fg='white',
@@ -236,15 +249,24 @@ sliders_frame.pack(pady=0)
 #####################
 win.mainloop()
 
+#######################
 
 ##To-do
 
 #Speak(),playsound() images
+#icon - red shaded png
 
-#decipher debugging
-#/ not in list
+#Folder
+#readme.md, pip install pyttsx3
+#Configuration for pyttsx3 https://www.youtube.com/watch?v=6RyCt2xWBcM
+#Project reference dll
+#Only for windows
 
-#Heading morse code change
+#morsecode.py testing
+#translator code modification -gfg
+#error handling
+
+
 
 #Setting default button widget, entry widget, frame widget
 #Code duplicacy
@@ -252,7 +274,7 @@ win.mainloop()
 #Separate layout or window 
 #Section for playing sounds-morse and speech
 
-#Folder
+#Heading morse code change
 
 #multi-threading
 #Efficiency of program
@@ -267,26 +289,16 @@ win.mainloop()
 
 #Button focus colors
 
-#Text to speech
-#pyttsx3
 
 #Layout
 #TextBox
 
-#image for speaker
 
 #About menu
 
-#readme.md, pip install pyttsx3
-#Configuration for pyttsx3 https://www.youtube.com/watch?v=6RyCt2xWBcM
-#Project reference dll
-#Only for windows
 
-#error handling
 
-#translator code modification -gfg
 
-#icon - red shaded png
 
 
 
