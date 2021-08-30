@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import Variable, font
-from tkinter.constants import FLAT, SUNKEN
+from tkinter.constants import E, FLAT, SUNKEN, W
 import morsecode,time
 
 
@@ -71,6 +71,8 @@ def space_insert():
 def clear():
     morse_entry.delete(0,tk.END)
 
+def backspace():
+    morse_entry.delete(len(morse_entry.get())-1,tk.END)
 
 
 
@@ -105,7 +107,7 @@ user_entry_frame=tk.Frame(bg='gray15')
 user_entry_label=tk.Label(user_entry_frame,text="Text",bg='gray15',
                 fg='#f20d0d',width=50,anchor='w'
                 )
-user_entry_label.pack()
+user_entry_label.pack(pady=(0,5))
 
 #Text entry
 user_entry=tk.Entry(user_entry_frame,textvariable=user_text,
@@ -114,9 +116,10 @@ user_entry=tk.Entry(user_entry_frame,textvariable=user_text,
 user_text.set('Enter text here')
 user_entry.pack()
 
+#Speak text button
 speak_button=tk.Button(user_entry_frame,text="Speak",command=speak,bg='#a11212',fg='white',
             activebackground='#a11212',activeforeground='white', relief=tk.FLAT, bd=3)
-speak_button.pack(anchor='e',pady=5)
+speak_button.pack(anchor='e')
 
 user_entry_frame.pack(pady=30)
 
@@ -129,13 +132,13 @@ encrypt_button=tk.Button(translate_buttons,text='Translate text to morse',comman
                 activebackground='#a11212',activeforeground='white',
                 relief=tk.FLAT,bd=3
                 )
-encrypt_button.grid(row=0,column=0,padx=5)
+encrypt_button.grid(row=0,column=0,padx=15)
 
 decrypt_button=tk.Button(translate_buttons,text='Translate morse to text',command=decrypt,bg='#a11212',fg='white',
                 activebackground='#a11212',activeforeground='white',
                 relief=tk.FLAT,bd=3
                 )
-decrypt_button.grid(row=0,column=1,padx=5)
+decrypt_button.grid(row=0,column=1,padx=15)
 
 translate_buttons.pack(pady=10)
 
@@ -146,27 +149,61 @@ translate_buttons.pack(pady=10)
 #Morse code frame
 morse_code_frame=tk.Frame(bg='gray15')
 
-#Morse code label
-morse_code_label=tk.Label(morse_code_frame,text="Morse code",bg='gray15',fg='#f20d0d',
-                width=50,anchor='w'
-                )
-morse_code_label.pack()
+row1_frame=tk.Frame(morse_code_frame,bg='gray15')
 
-#Translated morse
+#Morse code label
+morse_code_label=tk.Label(row1_frame,text="Morse code",bg='gray15',fg='#f20d0d',
+                width=35,anchor=W
+                )
+morse_code_label.grid(row=0,column=0,sticky=W,pady=0)
+
+#Dot button
+dot_button=tk.Button(row1_frame,text='.',command=dot_insert,bg='#a11212',fg='white',
+            activebackground='#a11212',activeforeground='white', relief=tk.FLAT, bd=3,
+            )
+dot_button.grid(row=0,column=1,padx=2)
+
+#Dash button
+dash_button=tk.Button(row1_frame,text='-',command=dash_insert,bg='#a11212',fg='white',
+            activebackground='#a11212',activeforeground='white', relief=tk.FLAT, bd=3
+            )
+dash_button.grid(row=0,column=2,padx=2)
+
+#Space button
+space_button=tk.Button(row1_frame,text=' ',command=space_insert,bg='#a11212',fg='white',
+            activebackground='#a11212',activeforeground='white', relief=tk.FLAT, bd=3
+            )
+space_button.grid(row=0,column=3,padx=2)
+
+#Backspace button
+space_button=tk.Button(row1_frame,text='<',command=backspace,bg='#a11212',fg='white',
+            activebackground='#a11212',activeforeground='white', relief=tk.FLAT, bd=3
+            )
+space_button.grid(row=0,column=4,padx=2)
+
+#Clear button
+clear_button=tk.Button(row1_frame,text='Clear',command=clear,bg='#a11212',fg='white',
+            activebackground='#a11212',activeforeground='white', relief=tk.FLAT, bd=3
+            )
+clear_button.grid(row=0,column=5,padx=(2,0))
+
+row1_frame.pack(pady=(40,0))
+
+#Morse code entry
 morse_entry=tk.Entry(morse_code_frame,textvariable=translated_morse,
                     width=50,bg='#D0D0D0',fg='black',relief=tk.FLAT,bd=2,
                     )
-morse_entry.pack()
+morse_entry.pack(anchor='e')
+
 
 #Button to play sound
 beep_button=tk.Button(morse_code_frame,text='Play sound',command=playsound,bg='#a11212',fg='white',
             activebackground='#a11212',activeforeground='white', relief=tk.FLAT, bd=3
             )
-beep_button.pack(pady=5,anchor='e')
+beep_button.pack(anchor=E)
 
 
-
-morse_code_frame.pack(pady=30)
+morse_code_frame.pack()
 
 
 ######################
@@ -202,13 +239,18 @@ win.mainloop()
 
 ##To-do
 
-#Dot buttons
 #Speak(),playsound() images
 
 #decipher debugging
+#/ not in list
+
+#Heading morse code change
 
 #Setting default button widget, entry widget, frame widget
 #Code duplicacy
+
+#Separate layout or window 
+#Section for playing sounds-morse and speech
 
 #Folder
 
