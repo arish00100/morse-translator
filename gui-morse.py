@@ -48,6 +48,32 @@ def encrypt():
 def playsound():
     morsecode.playsound(translated_morse.get(),timeunit_var.get(),frequency_var.get())
 
+#Function for decrypt_button
+def decrypt():
+    text=morsecode.decrypt(morse_entry.get())
+    user_entry.delete(0,tk.END)
+    user_entry.insert(0,text)
+
+
+#Function for speak
+def speak():
+    morsecode.speak(user_entry.get())
+    
+def dot_insert():
+    morse_entry.insert(tk.END,'.')
+
+def dash_insert():
+    morse_entry.insert(tk.END,'-')
+
+def space_insert():
+    morse_entry.insert(tk.END,' ')
+
+def clear():
+    morse_entry.delete(0,tk.END)
+
+
+
+
 
 ######################
 #Header
@@ -76,7 +102,7 @@ header_frame.pack(pady=20)
 user_entry_frame=tk.Frame(bg='gray15')
 
 #Text entry label
-user_entry_label=tk.Label(user_entry_frame,text="Enter text",bg='gray15',
+user_entry_label=tk.Label(user_entry_frame,text="Text",bg='gray15',
                 fg='#f20d0d',width=50,anchor='w'
                 )
 user_entry_label.pack()
@@ -88,16 +114,31 @@ user_entry=tk.Entry(user_entry_frame,textvariable=user_text,
 user_text.set('Enter text here')
 user_entry.pack()
 
+speak_button=tk.Button(user_entry_frame,text="Speak",command=speak,bg='#a11212',fg='white',
+            activebackground='#a11212',activeforeground='white', relief=tk.FLAT, bd=3)
+speak_button.pack(anchor='e',pady=5)
+
 user_entry_frame.pack(pady=30)
 
 #########################
 #Button to encrypt
 
-encrypt_button=tk.Button(text='Translate to morse',command=encrypt,bg='#a11212',fg='white',
+translate_buttons=tk.Frame(bg='gray15')
+
+encrypt_button=tk.Button(translate_buttons,text='Translate text to morse',command=encrypt,bg='#a11212',fg='white',
                 activebackground='#a11212',activeforeground='white',
                 relief=tk.FLAT,bd=3
                 )
-encrypt_button.pack(pady=10)
+encrypt_button.grid(row=0,column=0,padx=5)
+
+decrypt_button=tk.Button(translate_buttons,text='Translate morse to text',command=decrypt,bg='#a11212',fg='white',
+                activebackground='#a11212',activeforeground='white',
+                relief=tk.FLAT,bd=3
+                )
+decrypt_button.grid(row=0,column=1,padx=5)
+
+translate_buttons.pack(pady=10)
+
 
 #########################
 #Translated morse
@@ -122,6 +163,8 @@ beep_button=tk.Button(morse_code_frame,text='Play sound',command=playsound,bg='#
             activebackground='#a11212',activeforeground='white', relief=tk.FLAT, bd=3
             )
 beep_button.pack(pady=5,anchor='e')
+
+
 
 morse_code_frame.pack(pady=30)
 
@@ -149,7 +192,7 @@ frequency_scale=tk.Scale(sliders_frame,orient=tk.HORIZONTAL,from_=100,to=3000,re
 frequency_scale.set(1000)
 frequency_scale.pack(pady=10)
 
-sliders_frame.pack(pady=30)
+sliders_frame.pack(pady=0)
 
 
 
@@ -158,6 +201,14 @@ win.mainloop()
 
 
 ##To-do
+
+#Dot buttons
+#Speak(),playsound() images
+
+#decipher debugging
+
+#Setting default button widget, entry widget, frame widget
+#Code duplicacy
 
 #Folder
 
@@ -184,7 +235,9 @@ win.mainloop()
 
 #About menu
 
-#readme.md, pip
+#readme.md, pip install pyttsx3
+#Configuration for pyttsx3 https://www.youtube.com/watch?v=6RyCt2xWBcM
+#Project reference dll
 #Only for windows
 
 #error handling
