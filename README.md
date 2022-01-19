@@ -3,10 +3,10 @@
 ## About
 A simple morse code translator built in Python using tkinter.
 <p align="center">
-    <img src="demo.png" alt="Demo" style="height:430px; width:400px; margin:0 auto">
+    <img src="demo.png" alt="Demo" style="height:500px; width:470px; margin:0 auto">
 </p>
 
-**Note** This project uses winsound which is Windows exclusive.
+**Note:** This project uses winsound which is Windows exclusive.
 
 ## Features
 1. Translate text to morse code and vice-versa.
