@@ -8,7 +8,7 @@ A simple morse code translator built in Python using tkinter.
 
 **Note:** This project uses winsound which is Windows exclusive.
 
-## Features
+# Features
 1. Translate text to morse code and vice-versa.
 2. Play morse sound.
 3. Alter speed and frequency of morse sound.
