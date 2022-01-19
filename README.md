@@ -3,7 +3,7 @@
 ## About
 A simple morse code translator built in Python using tkinter.
 <div>
-    <img src="demo.png" alt="Demo" style="height:320px; width:300px; margin:0 auto">
+    <img src="demo.png" alt="Demo" style="height:430px; width:400px; margin:0 auto">
 </div>
 
 **Note** This project uses winsound which is Windows exclusive.
