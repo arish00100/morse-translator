@@ -4,7 +4,9 @@
 # Dictionary representing the morse code chart
 import winsound,time
 from threading import Timer
-import pyttsx3
+from gtts import gTTS  
+import playsound  
+
 
 
 
@@ -54,7 +56,7 @@ def playdash(timeunit,frequency):
 	time.sleep(timeunit)
 
 
-def playsound(morse,timeunit,frequency):
+def beep(morse,timeunit,frequency):
 	# timeunit=0.1	#0.5second
 	# frequency=1000
 	multiplier=0
@@ -143,11 +145,15 @@ def decrypt(morse):
 		text+=' '
 	return text
 
-def speak(text):
-	engine = pyttsx3.init()
-	voices = engine.getProperty('voices')
-	engine.setProperty('voice', voices[1].id)
-	engine.say(text)
-	engine.runAndWait()
+def speak(text_val):
+	# engine = pyttsx3.init()
+	# voices = engine.getProperty('voices')
+	# engine.setProperty('voice', voices[1].id)
+	# engine.say(text)
+	# engine.runAndWait()
+	obj = gTTS(text=text_val, lang='en', slow=False)  
+	obj.save("speech.mp3")  
+	playsound.playsound("speech.mp3")  
+
 
 

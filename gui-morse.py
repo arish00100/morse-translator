@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import Variable, font
 from tkinter.constants import E, FLAT, SUNKEN, W
 import morsecode,time
+import threading
 
 
 ####################
@@ -45,8 +46,10 @@ def encrypt():
     
 
 #Function for beep_button
-def playsound():
-    morsecode.playsound(translated_morse.get(),timeunit_var.get(),frequency_var.get())
+def beep():
+    th=threading.Thread(target=morsecode.beep,args=(translated_morse.get(),timeunit_var.get(),frequency_var.get()))
+    # morsecode.playsound(translated_morse.get(),timeunit_var.get(),frequency_var.get())
+    th.start()
 
 #Function for decrypt_button
 def decrypt():
@@ -210,7 +213,7 @@ morse_entry.pack(anchor='e')
 
 
 #Button to play sound
-beep_button=tk.Button(morse_code_frame,text='Play sound',command=playsound,bg='#a11212',fg='white',
+beep_button=tk.Button(morse_code_frame,text='Play sound',command=beep,bg='#a11212',fg='white',
             activebackground='#a11212',activeforeground='white', relief=tk.FLAT, bd=3
             )
 beep_button.pack(anchor=E)
@@ -256,11 +259,18 @@ win.mainloop()
 #Speak(),playsound() images
 #icon - red shaded png
 
+#/ button
+#changing slider
+
 #Folder
 #readme.md, pip install pyttsx3
 #Configuration for pyttsx3 https://www.youtube.com/watch?v=6RyCt2xWBcM
 #Project reference dll
 #Only for windows
+
+#About
+#Morse code
+#spaces and timings
 
 #morsecode.py testing
 #translator code modification -gfg
